@@ -3,6 +3,7 @@ package ac.cn.saya.nacos.discovery.client.controllers;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,19 +27,39 @@ public class UserController {
 
     private static final Logger logger = Logger.getLogger(UserController.class);
 
+    private final RestTemplate restTemplate;
+
     @Autowired
-    LoadBalancerClient loadBalancerClient;
+    public UserController(RestTemplate restTemplate) {this.restTemplate = restTemplate;}
 
     @GetMapping(value = "/query/{name}")
     public String queryUserInfo(@PathVariable(value = "name") String name){
-        // 通过spring cloud common中的负载均衡接口选取服务提供节点实现接口调用
-        ServiceInstance serviceInstance = loadBalancerClient.choose("alibaba-nacos-discovery-server");
-        // String url = serviceInstance.getUri() + "/server/api/user/" + name;
-        String url = serviceInstance.getUri() + "/server/api/user/grade" + name;
-        RestTemplate restTemplate = new RestTemplate();
-        String result = restTemplate.getForObject(url, String.class);
-        logger.info("Invoke : " + url + ", return : " + result);
-        return "Invoke : " + url + ", return : " + result;
+        // return restTemplate.getForObject("http://localhost:8001/server/api/user/" + name, String.class);
+        return restTemplate.getForObject("http://service-provider/server/api/user/" + name, String.class);
     }
+
+    private static final String SERVICE_NAME = "service-provider";
+
+//    @Autowired
+//    private DiscoveryClient discoveryClient;
+//
+//    /**
+//     * 获取所有服务
+//     */
+//    @RequestMapping("/services")
+//    public Object services() {
+//        return discoveryClient.getInstances(SERVICE_NAME);
+//    }
+//
+//    /**
+//     * 消费服务
+//     */
+//    @GetMapping(value = "/query/{name}")
+//    public String queryUserInfo(@PathVariable(value = "name") String name){
+//        ServiceInstance serviceInstance = (ServiceInstance) discoveryClient.getInstances(SERVICE_NAME);
+//        String callServiceResult = new RestTemplate().getForObject(serviceInstance.getUri().toString() + "/server/api/user/"+name, String.class);
+//        System.out.println(callServiceResult);
+//        return callServiceResult;
+//    }
 
 }
