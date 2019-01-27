@@ -8,13 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="alibaba-nacos-discovery-client" />
         <module name="alibaba-nacos-discovery-server" />
-        <module name="spring-cloud-alibaba" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="alibaba-nacos-discovery-client" target="1.8" />
       <module name="alibaba-nacos-discovery-server" target="1.8" />
-      <module name="spring-cloud-alibaba" target="1.5" />
+      <module name="spring-cloud-alibaba" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

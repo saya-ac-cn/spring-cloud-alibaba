@@ -1,6 +1,7 @@
 package ac.cn.saya.nacos.discovery.server;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -18,7 +19,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 public class AlibabaNacosDiscoveryServerApplication {
 
-	private static final Logger logger = Logger.getLogger(AlibabaNacosDiscoveryServerApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(AlibabaNacosDiscoveryServerApplication.class);
 
 	public static void main(String[] args) {
 		/// SpringApplication.run(AlibabaNacosDiscoveryServerApplication.class, args);
