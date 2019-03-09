@@ -3,6 +3,8 @@ package ac.cn.saya.nacos.discovery.client.controllers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping(value = "user")
+@RefreshScope
 public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -36,6 +39,14 @@ public class UserController {
         String result = restTemplate.getForObject(url, String.class);
         logger.info("Invoke : " + url + ", return : " + result);
         return "Invoke : " + url + ", return : " + result;
+    }
+
+    @Value("${didispace.title:}")
+    private String title;
+
+    @GetMapping("/test")
+    public String hello() {
+        return title;
     }
 
 //    @Autowired
