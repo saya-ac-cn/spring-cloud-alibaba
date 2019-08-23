@@ -1,0 +1,22 @@
+spring:
+  application:
+    # 项目名-必须要和配置中心的值保持一致
+    name: spring-cloud-alibaba-client
+  cloud:
+    nacos:
+      config:
+        # nacos配置中心地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件格式
+        file-extension: yaml
+        prefix: ${spring.application.name}
+      discovery:
+        server-addr: 127.0.0.1:8848
+        service: ${spring.application.name}
+# 上面的配置是和Nacos中的dataId 的格式是对应的
+# nacos的完整格式为：${prefix}-${spring.profile.active}.${file-extension}
+# prefix 默认为 spring.application.name 的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置
+# spring.profile.active 即为当前环境对应的 profile，
+# 当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId 的拼接格式变成 ${prefix}.${file-extension}
+# file-exetension 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。
+# 所以上述在nacos里面的配置应该是：spring-cloud-alibaba-client.yaml

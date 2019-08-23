@@ -23,12 +23,13 @@ import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping(value = "user")
+//实现配置的热加载
 @RefreshScope
 public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private static final String SERVICE_NAME = "http://service-provider";
+    private static final String SERVICE_NAME = "http://spring-cloud-alibaba-server";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -41,12 +42,12 @@ public class UserController {
         return "Invoke : " + url + ", return : " + result;
     }
 
-    @Value("${didispace.title:}")
-    private String title;
+    @Value("${email.user}")
+    private String user;
 
     @GetMapping("/test")
     public String hello() {
-        return title;
+        return user;
     }
 
 //    @Autowired
