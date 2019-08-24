@@ -14,9 +14,8 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  * @修改人和其它信息
  * 服务启动入口
  */
-
-@EnableDiscoveryClient
 @SpringBootApplication
+@EnableDiscoveryClient
 public class AlibabaNacosDiscoveryServerApplication {
 
 	private static Logger logger = LoggerFactory.getLogger(AlibabaNacosDiscoveryServerApplication.class);

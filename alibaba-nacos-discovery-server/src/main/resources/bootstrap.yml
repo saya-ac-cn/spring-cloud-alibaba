@@ -11,7 +11,9 @@ spring:
         file-extension: yaml
         prefix: ${spring.application.name}
       discovery:
+        # 服务注册地址
         server-addr: 127.0.0.1:8848
+        # 服务注册名
         service: ${spring.application.name}
 
 # 上面的配置是和Nacos中的dataId 的格式是对应的

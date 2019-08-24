@@ -1,5 +1,6 @@
 package ac.cn.saya.nacos.discovery.client.controllers;
 
+import ac.cn.saya.nacos.discovery.client.feign.ApiFeignService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,17 +30,14 @@ public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    private static final String SERVICE_NAME = "http://spring-cloud-alibaba-server";
-
     @Autowired
-    private RestTemplate restTemplate;
+    private ApiFeignService apiFeignService;
 
     @GetMapping(value = "/query/{name}")
     public String queryUserInfo(@PathVariable(value = "name") String name){
-        String url = SERVICE_NAME + "/server/api/user/" + name;
-        String result = restTemplate.getForObject(url, String.class);
-        logger.info("Invoke : " + url + ", return : " + result);
-        return "Invoke : " + url + ", return : " + result;
+        String result = apiFeignService.getUserInfo(name);
+        logger.info("return : " + result);
+        return "return : " + result;
     }
 
     @Value("${email.user}")
@@ -49,19 +47,6 @@ public class UserController {
     public String hello() {
         return user;
     }
-
-//    @Autowired
-//    LoadBalancerClient loadBalancerClient;
-//
-//    @GetMapping(value = "/query2/{name}")
-//    public String queryUserInfo2(@PathVariable(value = "name") String name) {
-//        // 通过spring cloud common中的负载均衡接口选取服务提供节点实现接口调用
-//        ServiceInstance serviceInstance = loadBalancerClient.choose("service-provider");
-//        String url = serviceInstance.getUri() + "/server/api/user/" + name;
-//        RestTemplate restTemplate = new RestTemplate();
-//        String result = restTemplate.getForObject(url, String.class);
-//        return "Invoke : " + url + ", return : " + result;
-//    }
 
 
 
