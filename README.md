@@ -2,7 +2,7 @@
 ## 本项目主要记录Alibaba版的SpringCloud的实战
 #### sudo ./startup.sh -m standalone 启动nacos
 ### 版本节点：
-#### 1.0.3.0804(20190824)
+#### 1.0.4.0825(20190825)
 版本描述:使用spring cloud alibab毕业版本（2.1.0.RELEASE）jar，spring boot 改为：2.1.7.RELEASE。项目接口调用改为feign接口方式。备注：NACOS版本为：1.1.3
 #### 1.0.3.0804(20190824)
 版本描述:修改父项目依赖，修改配置中心为yaml配置（此时nacos的0.9.0.release不能用）
