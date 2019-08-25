@@ -13,6 +13,9 @@ spring:
       discovery:
         server-addr: 127.0.0.1:8848
         service: ${spring.application.name}
+feign:
+  sentinel:
+    enabled: true
 # 上面的配置是和Nacos中的dataId 的格式是对应的
 # nacos的完整格式为：${prefix}-${spring.profile.active}.${file-extension}
 # prefix 默认为 spring.application.name 的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置

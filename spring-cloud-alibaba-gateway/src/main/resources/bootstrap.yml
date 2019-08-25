@@ -1,0 +1,51 @@
+spring:
+  application:
+    # 项目名-必须要和配置中心的值保持一致
+    name: spring-cloud-alibaba-gateway
+  cloud:
+    nacos:
+      config:
+        # nacos配置中心地址
+        server-addr: 127.0.0.1:8848
+        # 配置文件格式
+        file-extension: yaml
+        prefix: ${spring.application.name}
+      discovery:
+        # 服务注册地址
+        server-addr: 127.0.0.1:8848
+        # 服务注册名
+        service: ${spring.application.name}
+    # 路由网关配置
+    gateway:
+      # 设置与服务注册发现组件结合，这样可以采用服务名的路由策略
+      discovery:
+        locator:
+          enabled: true
+      # 配置路由规则
+      routes:
+        # 采用自定义路由 ID（有固定用法，不同的 id 有不同的功能，详见：https://cloud.spring.io/spring-cloud-gateway/2.0.x/single/spring-cloud-gateway.html#gateway-route-filters）
+        - id: NACOS-SERVER
+          # 采用 LoadBalanceClient 方式请求，以 lb:// 开头，后面的是注册在 Nacos 上的服务名
+          # 示例访问：http://127.0.0.1:8000/spring-cloud-alibaba-server/server/api/user/saya
+          uri: lb://spring-cloud-alibaba-server
+          # Predicate 翻译过来是“谓词”的意思，必须，主要作用是匹配用户的请求，有很多种用法
+          predicates:
+            # Method 方法谓词，这里是匹配 GET 和 POST 请求
+            #- Method=GET,POST
+            - Path=/server/**
+        - id: NACOS-CLIENT
+          # 采用 LoadBalanceClient 方式请求，以 lb:// 开头，后面的是注册在 Nacos 上的服务名
+          # 示例访问：http://127.0.0.1:8000/spring-cloud-alibaba-client/user/query/saya
+          uri: lb://spring-cloud-alibaba-client
+          # Predicate 翻译过来是“谓词”的意思，必须，主要作用是匹配用户的请求，有很多种用法
+          predicates:
+            # Method 方法谓词，这里是匹配 GET 和 POST 请求
+            - Method=GET,POST
+
+# 上面的配置是和Nacos中的dataId 的格式是对应的
+# nacos的完整格式为：${prefix}-${spring.profile.active}.${file-extension}
+# prefix 默认为 spring.application.name 的值，也可以通过配置项 spring.cloud.nacos.config.prefix来配置
+# spring.profile.active 即为当前环境对应的 profile，
+# 当 spring.profile.active 为空时，对应的连接符 - 也将不存在，dataId 的拼接格式变成 ${prefix}.${file-extension}
+# file-exetension 为配置内容的数据格式，可以通过配置项 spring.cloud.nacos.config.file-extension 来配置。目前只支持 properties 和 yaml 类型。
+# 所以上述在nacos里面的配置应该是：spring-cloud-alibaba-gateway.yaml

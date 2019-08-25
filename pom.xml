@@ -78,6 +78,7 @@
     <modules>
         <module>alibaba-nacos-discovery-server</module>
         <module>alibaba-nacos-discovery-client</module>
+        <module>spring-cloud-alibaba-gateway</module>
     </modules>
 
     <repositories>
