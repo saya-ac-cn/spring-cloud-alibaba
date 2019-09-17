@@ -2,6 +2,8 @@
 ## 本项目主要记录Alibaba版的SpringCloud的实战
 #### sudo ./startup.sh -m standalone 启动nacos
 ### 版本节点：
+#### 1.0.6.0917(20190917)
+增加全局过滤器。
 #### 1.0.5.0826(20190826)
 增加spring cloud gateway路由网关，以及增加熔断器。
 #### 1.0.4.0825(20190825)
