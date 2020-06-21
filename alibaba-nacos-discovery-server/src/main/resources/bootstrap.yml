@@ -3,18 +3,11 @@ spring:
     # 项目名-必须要和配置中心的值保持一致
     name: spring-cloud-alibaba-server
   cloud:
-    nacos:
-      config:
-        # nacos配置中心地址
-        server-addr: 127.0.0.1:8848
-        # 配置文件格式
-        file-extension: yaml
-        prefix: ${spring.application.name}
+    consul:
+      host: saya.ac.cn
+      port: 8500
       discovery:
-        # 服务注册地址
-        server-addr: 127.0.0.1:8848
-        # 服务注册名
-        service: ${spring.application.name}
+        service-name: ${spring.application.name}
 
 # 上面的配置是和Nacos中的dataId 的格式是对应的
 # nacos的完整格式为：${prefix}-${spring.profile.active}.${file-extension}

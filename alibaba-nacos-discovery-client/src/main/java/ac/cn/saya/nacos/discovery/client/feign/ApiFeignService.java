@@ -1,6 +1,5 @@
 package ac.cn.saya.nacos.discovery.client.feign;
 
-import ac.cn.saya.nacos.discovery.client.feign.fallback.FallbackApiFeignServiceImpl;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description:
  * 提供者1对外feign接口
  */
-@FeignClient(value = "spring-cloud-alibaba-server", fallback = FallbackApiFeignServiceImpl.class)
+@FeignClient(value = "spring-cloud-alibaba-server")
 public interface ApiFeignService {
 
     /**

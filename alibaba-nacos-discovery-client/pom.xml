@@ -27,10 +27,10 @@
 					<groupId>org.springframework.boot</groupId>
 					<artifactId>spring-boot-starter-logging</artifactId>
 				</exclusion>
-				<exclusion>
-					<groupId>org.hibernate.validator</groupId>
-					<artifactId>hibernate-validator</artifactId>
-				</exclusion>
+<!--				<exclusion>-->
+<!--					<groupId>org.hibernate.validator</groupId>-->
+<!--					<artifactId>hibernate-validator</artifactId>-->
+<!--				</exclusion>-->
 			</exclusions>
 		</dependency>
 		<!--健康检查-->
@@ -55,15 +55,10 @@
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
 		</dependency>
-		<!--加入Nacos的服务注册与发现模块-->
+		<!--加入Consul的服务注册与发现模块-->
 		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
-		<!--nacos集中统一配置-->
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
 		</dependency>
 	</dependencies>
 

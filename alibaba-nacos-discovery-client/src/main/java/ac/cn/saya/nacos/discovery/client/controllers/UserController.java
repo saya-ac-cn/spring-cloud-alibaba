@@ -40,14 +40,6 @@ public class UserController {
         return "return : " + result;
     }
 
-    @Value("${email.user}")
-    private String user;
-
-    @GetMapping("/test")
-    public String hello() {
-        return user;
-    }
-
 
 
 }
