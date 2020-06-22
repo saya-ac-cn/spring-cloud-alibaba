@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Description:
  * 提供者1对外feign接口
  */
-@FeignClient(value = "spring-cloud-alibaba-server")
+@FeignClient(value = "provider",contextId = "api",path = "server/api")
 public interface ApiFeignService {
 
     /**
@@ -26,7 +26,7 @@ public interface ApiFeignService {
      * @修改人和其它信息
      * 查询用户
      */
-    @GetMapping(value = "/server/api/user/{name}")
+    @GetMapping(value = "user/{name}")
     public String getUserInfo(@PathVariable(value = "name") String name);
 
     /**
@@ -38,7 +38,7 @@ public interface ApiFeignService {
      * @修改人和其它信息
      * 查询用户的成绩
      */
-    @GetMapping(value = "/user/grade")
+    @GetMapping(value = "user/grade")
     public String getUserGrade(@RequestParam(value = "name") String name);
 
 }

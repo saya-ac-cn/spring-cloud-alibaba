@@ -18,14 +18,11 @@ import org.springframework.web.client.RestTemplate;
  * @Description: TODO
  * @Author Saya
  * @Date: 2019/1/20 23:12
- * @Description:
- * 用户查询模块
+ * @Description: 用户查询模块
  */
 
 @RestController
 @RequestMapping(value = "user")
-//实现配置的热加载
-@RefreshScope
 public class UserController {
 
     private static Logger logger = LoggerFactory.getLogger(UserController.class);
@@ -34,12 +31,10 @@ public class UserController {
     private ApiFeignService apiFeignService;
 
     @GetMapping(value = "/query/{name}")
-    public String queryUserInfo(@PathVariable(value = "name") String name){
+    public String queryUserInfo(@PathVariable(value = "name") String name) {
         String result = apiFeignService.getUserInfo(name);
         logger.info("return : " + result);
         return "return : " + result;
     }
-
-
 
 }

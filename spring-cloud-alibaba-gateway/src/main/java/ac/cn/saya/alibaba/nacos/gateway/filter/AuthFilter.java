@@ -2,7 +2,6 @@ package ac.cn.saya.alibaba.nacos.gateway.filter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.collect.Maps;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +12,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
 import java.util.Map;
 /**
  * @Title: AuthFilter
@@ -32,7 +32,7 @@ public class AuthFilter implements GlobalFilter, Ordered{
             ServerHttpResponse response = exchange.getResponse();
 
             // 封装错误信息
-            Map<String, Object> responseData = Maps.newHashMap();
+            Map<String, Object> responseData = new HashMap<>(4);
             responseData.put("code", 401);
             responseData.put("message", "非法请求");
             responseData.put("cause", "Token is empty");
