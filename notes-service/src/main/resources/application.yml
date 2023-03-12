@@ -1,0 +1,23 @@
+server:
+  port: 8002
+
+spring:
+  application:
+    name: notes-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 10.100.30.208:80
+        enabled: true
+      username: nacos
+      password: uino@nacos
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always

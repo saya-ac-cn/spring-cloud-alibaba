@@ -1,8 +1,0 @@
-# nacos配置中心配置参数副本，防止数据丢失
-server:
-  port: 8001
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
